@@ -1,0 +1,16 @@
+$blue: blue;
+@mixin center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#app {
+  position: relative;
+  top: 10px;
+  @include center;
+  .app {
+    position: relative;
+    top: 10px;
+    display: inline;
+  }
+}
