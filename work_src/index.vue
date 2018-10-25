@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: "index",
+  name: 'index',
   components: {},
   data() {
     return {};
@@ -15,11 +15,11 @@ export default {
   watch: {},
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 <style lang='scss' scoped>
-@import "./index.scss";
+@import './index.scss';
 .app {
   position: relative;
   top: 10px;

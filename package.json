@@ -7,7 +7,8 @@
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint ./work_src/**/*.{js,vue} --fix",
     "lint:style": "stylelint './work_src/**/*.{vue,scss,css}' --fix",
-    "prettier": "prettier --write ./work_src/**/**/**/*"
+    "prettier": "prettier --write ./work_src/**/**/**/*",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,8 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.0.0-beta.3",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
     "stylelint": "^9.6.0",
     "stylelint-config-idiomatic-order": "^6.1.0",
@@ -42,5 +45,24 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^1.0.0",
     "stylelint-scss": "^3.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,vue,scss,css}": [
+      "npm run prettier",
+      "git add"
+    ],
+    "**/*.{js,vue}": [
+      "npm run lint:js",
+      "git add"
+    ],
+    "**/*.{vue,scss,css}": [
+      "npm run lint:style",
+      "git add"
+    ]
   }
 }

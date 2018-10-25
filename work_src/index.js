@@ -19,10 +19,7 @@ export function isWxBrowser() {
  * 是否是安卓机
  */
 export function isAndroid() {
-  return (
-    navigator.userAgent.indexOf("Android") > -1 ||
-    navigator.userAgent.indexOf("Adr") > -1
-  );
+  return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1;
 }
 
 /**
@@ -54,19 +51,19 @@ export function timeDiff(dateTimeStamp) {
   let dayC = diffValue / day;
   let hourC = diffValue / hour;
   let minC = diffValue / minute;
-  let result = "";
+  let result = '';
   if (monthC >= 1) {
-    result = "" + parseInt(monthC) + "月前";
+    result = '' + parseInt(monthC) + '月前';
   } else if (weekC >= 1) {
-    result = "" + parseInt(weekC) + "周前";
+    result = '' + parseInt(weekC) + '周前';
   } else if (dayC >= 1) {
-    result = "" + parseInt(dayC) + "天前";
+    result = '' + parseInt(dayC) + '天前';
   } else if (hourC >= 1) {
-    result = "" + parseInt(hourC) + "小时前";
+    result = '' + parseInt(hourC) + '小时前';
   } else if (minC >= 1) {
-    result = "" + parseInt(minC) + "分钟前";
+    result = '' + parseInt(minC) + '分钟前';
   } else {
-    result = "刚刚";
+    result = '刚刚';
   }
   return result;
 }
@@ -77,27 +74,24 @@ export function timeDiff(dateTimeStamp) {
  * @param {string} fmt 格式化的格式
  * @return {string} 格式后的时间
  */
-export function timeFormat(time, fmt = "yyyy-MM-dd hh:mm:ss") {
+export function timeFormat(time, fmt = 'yyyy-MM-dd hh:mm:ss') {
   let o = {
-    "M+": time.getMonth() + 1, // 月份
-    "d+": time.getDate(), // 日
-    "h+": time.getHours(), // 小时
-    "m+": time.getMinutes(), // 分
-    "s+": time.getSeconds(), // 秒
-    "q+": Math.floor((time.getMonth() + 3) / 3), // 季度
-    S: time.getMilliseconds() // 毫秒
+    'M+': time.getMonth() + 1, // 月份
+    'd+': time.getDate(), // 日
+    'h+': time.getHours(), // 小时
+    'm+': time.getMinutes(), // 分
+    's+': time.getSeconds(), // 秒
+    'q+': Math.floor((time.getMonth() + 3) / 3), // 季度
+    S: time.getMilliseconds(), // 毫秒
   };
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(
-      RegExp.$1,
-      (time.getFullYear() + "").substr(4 - RegExp.$1.length)
-    );
+    fmt = fmt.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length));
   }
   for (var k in o) {
-    if (new RegExp("(" + k + ")").test(fmt))
+    if (new RegExp('(' + k + ')').test(fmt))
       fmt = fmt.replace(
         RegExp.$1,
-        RegExp.$1.length === 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
       );
   }
   return fmt;
@@ -108,7 +102,7 @@ export function timeFormat(time, fmt = "yyyy-MM-dd hh:mm:ss") {
  * @param {date} haveTime
  */
 export function getCountTime(haveTime, isData) {
-  if (typeof haveTime !== "number") {
+  if (typeof haveTime !== 'number') {
     return false;
   }
   haveTime = Math.floor(haveTime / 1000);
@@ -119,7 +113,7 @@ export function getCountTime(haveTime, isData) {
   let hour = Math.floor(haveTime / 3600 - 24 * day);
   let minute = Math.floor((haveTime - 3600 * hour - 24 * 3600 * day) / 60);
   let second = haveTime % 60;
-  const completenum = num => (num < 10 ? "0" + num : num);
+  const completenum = num => (num < 10 ? '0' + num : num);
   if (isData) {
     return [day, hour, minute, second].map(item => completenum(item));
   }
@@ -134,7 +128,7 @@ export function fullImgUrl(url) {
   if (!url) {
     return url;
   }
-  if (url.indexOf("http") !== -1) {
+  if (url.indexOf('http') !== -1) {
     return url;
   } else {
     // return env.imgUrl + url;
@@ -166,14 +160,11 @@ export function uploadImgPreview(input) {
  * @param {*} time
  */
 export function vibrate(time) {
-  let vibrateSupport = "vibrate" in navigator;
+  let vibrateSupport = 'vibrate' in navigator;
   if (vibrateSupport) {
     // 兼容不同的浏览器
     navigator.vibrate =
-      navigator.vibrate ||
-      navigator.webkitVibrate ||
-      navigator.mozVibrate ||
-      navigator.msVibrate;
+      navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
     return navigator.vibrate(time);
   } else {
     return false;
@@ -187,16 +178,16 @@ export function vibrate(time) {
 export function setWechatTitle(title) {
   document.title = title;
   if (isIos()) {
-    let iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.setAttribute("src", "/static/favicon.ico");
+    let iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.setAttribute('src', '/static/favicon.ico');
     const iframeCallback = () => {
       setTimeout(() => {
-        iframe.removeEventListener("load", iframeCallback);
+        iframe.removeEventListener('load', iframeCallback);
         document.body.removeChild(iframe);
       }, 0);
     };
-    iframe.addEventListener("load", iframeCallback);
+    iframe.addEventListener('load', iframeCallback);
     document.body.appendChild(iframe);
   }
 }

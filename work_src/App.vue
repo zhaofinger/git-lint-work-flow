@@ -5,10 +5,12 @@
 
 <script>
 export default {
-  name: "app",
+  name: 'app',
   components: {},
   data() {
-    return {};
+    return {
+      a: 100,
+    };
   },
   filters: {},
   computed: {},
@@ -17,9 +19,9 @@ export default {
     testMethod() {
       let a;
       return a;
-    }
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
